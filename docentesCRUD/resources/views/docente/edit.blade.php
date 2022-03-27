@@ -11,16 +11,21 @@
     <title>Crear un registro de docente</title>
 </head>
 <body>
-<div style = "padding:20px">
-<h1>Editar el registro de un docente</h1>
+    <div class="container">
+        <br>
+        <h1>Editar el registro de un docente</h1>
 
-<form action="{{ url('/docente/'.$docente->id) }}" method="post">
-    <!-- token de seguridad -->
-    @csrf
-    {{ method_field('PUT') }}
-    @include('docente.form')
-</form>
-</div>
+        <form action="{{ url('/docente/'.$docente->id) }}" method="post">
+            <!-- token de seguridad -->
+            @csrf
+            {{ method_field('PUT') }}
+            @include('docente.form')
+        </form>
+    </div>
 </body>
 </html>
+
+
+
+
 

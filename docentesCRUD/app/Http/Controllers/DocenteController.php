@@ -40,7 +40,9 @@ class DocenteController extends Controller
     {
         $docenteData = request()->except('_token');
         Docente::insert($docenteData);
-        return response() -> json($docenteData);
+        //return response() -> json($docenteData);
+        //guardado de dato
+        return redirect('docente');
     }
 
     /**
@@ -57,34 +59,44 @@ class DocenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Docente  $docente
+     * 
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Docente $docente)
+    public function edit($id)
     {
-        //
+        $docente= Docente:: findOrFail($id);
+        return view('docente.edit',compact('docente'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Docente  $docente
+     * @param int $id
      * @return \Illuminate\Http\Response
+     * 
      */
-    public function update(Request $request, Docente $docente)
+    public function update(Request $request, $id)
     {
-        //
+        $docenteData = request()-> except(['_token','_method']);
+        Docente::where('id','=',$id)->update($docenteData);
+        return redirect('docente'); 
+        //return response() -> json($docenteData);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Docente  $docente
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Docente $docente)
+    public function destroy( $id)
     {
         //
+        Docente::destroy($id);
+        return redirect('docente');
+
     }
 }

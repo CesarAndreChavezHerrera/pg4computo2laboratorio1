@@ -19,7 +19,7 @@
         <h1>Lista de docentes registrados</h1> 
         <br>
         
-        <a href="create">Ir para crear un nuevo registro</a>
+        <a href="/docente/create">Ir para crear un nuevo registro</a>
         <table class="table ">
             <thead>
                 <tr>
@@ -46,8 +46,26 @@
                     <td>{{ $x ->Direccion }}</td>
                     <td>{{ $x ->Materia }}</td>
                     <td>{{ $x ->Institucion }}</td>
-                    <td><button type="button" name="" id="" class="btn btn-info">Editar</button></td>
-                    <td><button type="button" name="" id="" class="btn btn-warning">Eliminar</button></td>
+                    <td>
+                       <a class="btn btn-success" href="docente/{{$x ->id}}/edit">editar</a>
+                    </td>
+
+
+                    <td>
+                        <form action="{{url('/docente/'.$x->id)}}" method='post'>
+                            @csrf
+                            {{method_field('DELETE')}}
+                            
+                            <input 
+                            type = 'submit'
+                            onclick= "return confirm('Desea eliminar el registro')"
+                            class="btn btn-warning"
+                            value = 'Eliminar'
+                            
+                            />
+
+                        </form>
+                    </td>
 
                 </tr>
                 @endforeach
